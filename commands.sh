@@ -9,6 +9,11 @@ FILLED_SPACE="5"
 SHOW_ACTIVE_PROCESSES="6"
 BACK="9"
 
+echo "------------------------------"
+echo "------COMMANDS MENU-----------"
+echo "------------------------------"
+echo ""
+
 function printCommandsMenu() {
   echo "Selecciona alguna de las siguientes opciones sobre tu sistema:"
   echo "1: Hora del sistema"

@@ -12,8 +12,7 @@ function printPermissionsMenu() {
 }
 
 function main() {
-  echo "Seleccione el archivo para cambiar permisos"
-  read selectedFile
+  read -p "Seleccione el archivo para cambiar permisos: " selectedFile
 
   if test -f $selectedFile; then
     echo ""
@@ -24,26 +23,21 @@ function main() {
 
   printPermissionsMenu
 
-  echo "Ingrese permiso para el usuario"
-  read selectedPermission
+  read -p "Ingrese permiso para el usuario: " selectedPermission
 
   while [[ ! " ${USER_PERMISSIONS[@]} " =~ " ${selectedPermission} " ]]; do
-    echo "Permiso invalido, ingrese permiso para el usuario"
-    read selectedPermission
+    read -p "Permiso invalido, ingrese permiso para el usuario: " selectedPermission
   done
 
-  echo "Ingrese permiso para el grupo"
-  read selectedGroupPermission
+  read -p "Ingrese permiso para el grupo: " selectedGroupPermission
   while [[ ! " ${USER_PERMISSIONS[@]} " =~ " ${selectedGroupPermission} " ]]; do
-    echo "Permiso invalido, ingrese permiso para el grupo"
-    read selectedGroupPermission
+    read -p "Permiso invalido, ingrese permiso para el grupo: " selectedGroupPermission
   done
 
-  echo "Ingrese permiso para otros"
-  read selectedOtherPermission
+  read -p "Ingrese permiso para otros: " selectedOtherPermission
   while [[ ! " ${USER_PERMISSIONS[@]} " =~ " ${selectedOtherPermission} " ]]; do
-    echo "Permiso invalido, ingrese permiso para otros"
-    read selectedOtherPermission
+    echo 
+    read -p "Permiso invalido, ingrese permiso para otros: " selectedOtherPermission
   done
 
   chmod $selectedPermission$selectedGroupPermission$selectedOtherPermission $selectedFile

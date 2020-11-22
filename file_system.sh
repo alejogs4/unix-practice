@@ -10,9 +10,14 @@ CHANGE_FILE_NAME="6"
 DELETE_DIRECTORY="7"
 BACK="9"
 
+echo "---------------------------------"
+echo "------FILE SYSTEM MENU-----------"
+echo "---------------------------------"
+echo ""
+
 function printFileSystemMenu() {
   echo "1: Crear directorio"
-  echo "2: Copiar archivos"
+  echo "2: Copiar archivo"
   echo "3: Modificar permisos"
   echo "4: Mostrar contenido del archivo"
   echo "5: Borrar archivo"
@@ -22,13 +27,11 @@ function printFileSystemMenu() {
 }
 
 function executeFileSystemMenu() {
-  echo "Selecciona alguna de las siguientes opciones sobre tu sistema:"
-  read selectedMenu
+  read -p "Selecciona alguna de las siguientes opciones sobre tu sistema: " selectedMenu
 
   while [[ ! "$selectedMenu" -eq $EXIT_MENU ]]; do
     if [[ "$selectedMenu" -eq $CREATE_DIRECTORY ]]; then
-      echo "Ingresa el directorio que quieres crear: "
-      read directory
+      read -p "Ingresa el directorio que quieres crear: " directory
 
       if test -d $directory; then
         echo "El directorio ya existe"
@@ -37,10 +40,8 @@ function executeFileSystemMenu() {
       fi
     fi
     if [[ "$selectedMenu" -eq $COPY_FILES ]]; then
-      echo "Ingresa el archivo a copiar: "
-      read file
-      echo "Ingresa la carpeta donde se va a copiar los archivos: "
-      read cpdirectory
+      read -p "Ingresa el archivo a copiar: " file
+      read -p "Ingresa la carpeta donde se va a copiar el archivo: " cpdirectory
 
       if test -f $file && test -d $cpdirectory; then
         cp $file $cpdirectory
@@ -52,8 +53,7 @@ function executeFileSystemMenu() {
        bash permissions.sh
     fi
     if [[ "$selectedMenu" -eq $SHOW_FILE_CONTENT ]]; then
-      echo "Ingrese el archivo a mostrar: "
-      read printFile
+      read -p "Ingrese el archivo a mostrar: " printFile
 
       if test -f $printFile; then
         cat $printFile
@@ -62,8 +62,7 @@ function executeFileSystemMenu() {
       fi
     fi
     if [[ "$selectedMenu" -eq $REMOVE_FILE ]]; then
-      echo "Ingrese el archivo a eliminar: "
-      read fileToRemove
+      read -p "Ingrese el archivo a eliminar: " fileToRemove
 
       if test -f $fileToRemove; then
         rm $fileToRemove
@@ -72,10 +71,8 @@ function executeFileSystemMenu() {
       fi
     fi
     if [[ "$selectedMenu" -eq $CHANGE_FILE_NAME ]]; then
-      echo "Ingrese el archivo a cambiar nombre: "
-      read fileToChange
-      echo "Ingrese el nuevo nombre: "
-      read newName
+      read -p "Ingrese el archivo a cambiar nombre: " fileToChange
+      read -p "Ingrese el nuevo nombre: " newName
 
       if test -f $fileToChange; then
         mv $fileToChange $newName
@@ -84,8 +81,7 @@ function executeFileSystemMenu() {
       fi
     fi
     if [[ "$selectedMenu" -eq $DELETE_DIRECTORY ]]; then
-      echo "Ingrese el directorio a borrar"
-      read directoryToRemove
+      read -p "Ingrese el directorio a borrar: " directoryToRemove
 
       if test -d $directoryToRemove; then
         rm -r $directoryToRemove
@@ -98,8 +94,8 @@ function executeFileSystemMenu() {
     fi
 
     sleep 1
-    echo "Seleccione una opcion:"
-    read selectedMenu
+    printFileSystemMenu
+    read -p "Seleccione una opcion: " selectedMenu
   done
 }
 

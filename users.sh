@@ -9,6 +9,11 @@ BACK="9"
 
 EMPTY_USER=""
 
+echo "--------------------------"
+echo "------USER MENU-----------"
+echo "--------------------------"
+echo ""
+
 function printUsersMenu() {
   echo "1: Mostrar usuarios conectados"
   echo "2: Mostrar cuantos usuarios estan conectados"
@@ -18,8 +23,7 @@ function printUsersMenu() {
 }
 
 function executeUsersMenu() {
-  echo "Selecciona alguna de las siguientes opciones:"
-  read selectedMenu
+  read -p "Selecciona alguna de las siguientes opciones: "  selectedMenu
 
   while [[ ! "$selectedMenu" -eq $BACK ]]; do
     if [[ "$selectedMenu" -eq $CONNECTED_USERS ]]; then
@@ -31,20 +35,19 @@ function executeUsersMenu() {
       who -q
     fi
     if [[ "$selectedMenu" -eq $IS_CONNECTED_USER ]]; then
-       echo "Ingrese el nombre del usuario que quiere encontrar: "
-       read connectedUser
+       read -p "Ingrese el nombre del usuario que quiere encontrar: " connectedUser
        user=$(who|grep $connectedUser)
        echo "$user"     
     fi
     if [[ "$selectedMenu" -eq $SEND_MESSAGE ]]; then
        who
        read -p "Ingrese el nombre del usuario que quiere enviarle el mensaje: " $userMessage
-       write $userMessage     
+       write $userMessage pts/7    
     fi
 
     sleep 1
-    echo "Seleccione una opcion:"
-    read selectedMenu
+    printUsersMenu
+    read -p "Seleccione una opcion: " selectedMenu
   done
 }
 
