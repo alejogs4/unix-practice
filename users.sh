@@ -42,7 +42,7 @@ function executeUsersMenu() {
     if [[ "$selectedMenu" -eq $SEND_MESSAGE ]]; then
        who
        read -p "Ingrese el nombre del usuario que quiere enviarle el mensaje: " $userMessage
-       write $userMessage pts/7    
+       write $userMessage    
     fi
 
     sleep 1

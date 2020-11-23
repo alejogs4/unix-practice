@@ -40,10 +40,10 @@ function executeCommandsMenu() {
       passwd
     fi
     if [[ "$selectedMenu" -eq $FREE_SPACE ]]; then
-      df -h | more
+      df -h
     fi
     if [[ "$selectedMenu" -eq $FILLED_SPACE ]]; then
-      du -h | more
+      du -h
     fi
     if [[ "$selectedMenu" -eq $SHOW_ACTIVE_PROCESSES ]]; then
       ps -aux | more
